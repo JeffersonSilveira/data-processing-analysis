@@ -11,7 +11,9 @@ import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import dataprocessinganalysisformats.dominio.Customer;
+import dataprocessinganalysisformats.model.Customer;
+import dataprocessinganalysisformats.model.Sale;
+import dataprocessinganalysisformats.model.Salesman;
 
 @Configuration
 public class ClienteTransacaoLineMapperConfig {
@@ -28,9 +30,9 @@ public class ClienteTransacaoLineMapperConfig {
 	@SuppressWarnings("rawtypes")
 	private Map<String, FieldSetMapper> fieldSetMappers() {
 		Map<String, FieldSetMapper> fieldSetMappers = new HashMap<>();
-//		fieldSetMappers.put("0*", fieldSetMapper(Cliente.class));
-//		fieldSetMappers.put("1*", fieldSetMapper(Transacao.class));
-		fieldSetMappers.put("2*", fieldSetMapper(Customer.class));
+		fieldSetMappers.put("001*", fieldSetMapper(Salesman.class));
+		fieldSetMappers.put("002*", fieldSetMapper(Customer.class));
+		fieldSetMappers.put("003*", fieldSetMapper(Sale.class));
 
 		return fieldSetMappers;
 	}
@@ -44,36 +46,35 @@ public class ClienteTransacaoLineMapperConfig {
 
 	private Map<String, LineTokenizer> tokenizers() {
 		Map<String, LineTokenizer> tokenizers = new HashMap<>();
-//		tokenizers.put("0*",  clienteLineTokenizer());
-//		tokenizers.put("1*",  transacaoLineTokenizer());
-		tokenizers.put("2*", customerLineTokenizer());
+		tokenizers.put("001*", salesmanLineTokenizer());
+		tokenizers.put("002*", customerLineTokenizer());
+		tokenizers.put("003*", saleLineTokenizer());
 
 		return tokenizers;
+	}
+
+	private LineTokenizer saleLineTokenizer() {
+		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+		lineTokenizer.setNames("id", "salesmanName");
+		lineTokenizer.setDelimiter("ç");
+		lineTokenizer.setIncludedFields(1,  3);
+		return lineTokenizer;
+	}
+
+	private LineTokenizer salesmanLineTokenizer() {
+		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+		lineTokenizer.setNames("cpf", "name", "salary");
+		lineTokenizer.setDelimiter("ç");
+		lineTokenizer.setIncludedFields(1, 2, 3);
+		return lineTokenizer;
 	}
 
 	private LineTokenizer customerLineTokenizer() {
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
 		lineTokenizer.setNames("cnpj", "name", "businessArea");
-		lineTokenizer.setDelimiter("ç");		
+		lineTokenizer.setDelimiter("ç");
 		lineTokenizer.setIncludedFields(1, 2, 3);
 		return lineTokenizer;
 
 	}
-
-	private LineTokenizer clienteLineTokenizer() {
-
-		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames("nome", "sobrenome", "idade", "email");
-		lineTokenizer.setIncludedFields(1, 2, 3, 4);
-		return lineTokenizer;
-	}
-
-	private LineTokenizer transacaoLineTokenizer() {
-
-		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames("id", "descricao", "valor");
-		lineTokenizer.setIncludedFields(1, 2, 3);
-		return lineTokenizer;
-	}
-
 }

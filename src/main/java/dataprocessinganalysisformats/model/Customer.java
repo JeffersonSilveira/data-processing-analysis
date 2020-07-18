@@ -1,4 +1,4 @@
-package dataprocessinganalysisformats.dominio;
+package dataprocessinganalysisformats.model;
 
 import java.io.Serializable;
 
