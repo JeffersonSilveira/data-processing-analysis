@@ -58,7 +58,7 @@ public class TransactionLineMapperConfig {
 
 	private LineTokenizer saleLineItemTokenizer() {
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames("id", "quantity", "unitPrice");
+		lineTokenizer.setNames("id", "quantity", "price");
 		lineTokenizer.setDelimiter("-");
 		lineTokenizer.setIncludedFields(1, 2, 3);
 		return lineTokenizer;

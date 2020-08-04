@@ -3,19 +3,29 @@ package dataprocessinganalysisformats.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 public class Sale implements Serializable {
 
 	private static final long serialVersionUID = -3817343393131112677L;
 
-	private Long id;
-    private List<SaleItem> items;
+	@NotNull	
+	private Integer id;
+	
+	private List<SaleItem> items;
+    
+    @NotNull
+	@Size(min = 1, max = 100)
+	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Nome deve ser alfabético")
 	private String salesmanName;
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

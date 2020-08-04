@@ -18,9 +18,7 @@ public class MultipleFormatsReaderFileConfig {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@StepScope
 	@Bean
-	public FlatFileItemReader arquivoMultiplosFormatosItemReader(
-			@Value("#{jobParameters['arquivoClientes']}") Resource arquivoClientes,
-			LineMapper lineMapper) {
+	public FlatFileItemReader arquivoMultiplosFormatosItemReader(LineMapper lineMapper) {
 		return new FlatFileItemReaderBuilder()
 				.name("arquivoMultiplosFormatosItemReader")
 				.resource(inputResource)
