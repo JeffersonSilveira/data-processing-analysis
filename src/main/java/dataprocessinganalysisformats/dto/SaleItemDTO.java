@@ -1,10 +1,10 @@
-package dataprocessinganalysisformats.model;
+package dataprocessinganalysisformats.dto;
 
 import java.io.Serializable;
 
-public class SaleItem implements Serializable {
+public class SaleItemDTO implements Serializable {
 
-	private static final long serialVersionUID = 7752695424777724086L;
+	private static final long serialVersionUID = 7029728218578776319L;
 
 	private String id;
 	private String quantity;
@@ -36,6 +36,7 @@ public class SaleItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "SaleItem [id=" + id + ", quantity=" + quantity + ", unitPrice=" + unitPrice + "]";
+		return "SaleItemDTO [id=" + id + ", quantity=" + quantity + ", unitPrice=" + unitPrice + "]";
 	}
+
 }

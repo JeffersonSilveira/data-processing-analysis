@@ -13,10 +13,11 @@ import org.springframework.context.annotation.Configuration;
 
 import dataprocessinganalysisformats.model.Customer;
 import dataprocessinganalysisformats.model.Sale;
+import dataprocessinganalysisformats.model.SaleItem;
 import dataprocessinganalysisformats.model.Salesman;
 
 @Configuration
-public class ClienteTransacaoLineMapperConfig {
+public class TransactionLineMapperConfig {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
@@ -33,6 +34,7 @@ public class ClienteTransacaoLineMapperConfig {
 		fieldSetMappers.put("001*", fieldSetMapper(Salesman.class));
 		fieldSetMappers.put("002*", fieldSetMapper(Customer.class));
 		fieldSetMappers.put("003*", fieldSetMapper(Sale.class));
+		fieldSetMappers.put("004*", fieldSetMapper(SaleItem.class));
 
 		return fieldSetMappers;
 	}
@@ -49,15 +51,24 @@ public class ClienteTransacaoLineMapperConfig {
 		tokenizers.put("001*", salesmanLineTokenizer());
 		tokenizers.put("002*", customerLineTokenizer());
 		tokenizers.put("003*", saleLineTokenizer());
+		tokenizers.put("004*", saleLineItemTokenizer());
 
 		return tokenizers;
 	}
 
+	private LineTokenizer saleLineItemTokenizer() {
+		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+		lineTokenizer.setNames("id", "quantity", "unitPrice");
+		lineTokenizer.setDelimiter("-");
+		lineTokenizer.setIncludedFields(1, 2, 3);
+		return lineTokenizer;
+	}
+
 	private LineTokenizer saleLineTokenizer() {
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames("id", "salesmanName");
+		lineTokenizer.setNames("id",  "salesmanName");
 		lineTokenizer.setDelimiter("ç");
-		lineTokenizer.setIncludedFields(1,  3);
+		lineTokenizer.setIncludedFields(1, 2);
 		return lineTokenizer;
 	}
 

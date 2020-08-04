@@ -1,30 +1,28 @@
-package dataprocessinganalysisformats.model;
+package dataprocessinganalysisformats.dto;
 
 import java.io.Serializable;
-import java.util.List;
 
-public class Sale implements Serializable {
+public class SaleDTO implements Serializable {
 
-	private static final long serialVersionUID = -3817343393131112677L;
+	private static final long serialVersionUID = -2896043568041658230L;
 
-	private Long id;
-    private List<SaleItem> items;
+	private String id;
+	private String items;
 	private String salesmanName;
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	
-	public List<SaleItem> getItems() {
+	public String getItems() {
 		return items;
 	}
 
-	public void setItems(List<SaleItem> items) {
+	public void setItems(String items) {
 		this.items = items;
 	}
 
@@ -40,5 +38,7 @@ public class Sale implements Serializable {
 	public String toString() {
 		return "Sale [id=" + id + ", items=" + items + ", salesmanName=" + salesmanName + "]";
 	}
+	
+	
 
 }
