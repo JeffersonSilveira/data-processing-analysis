@@ -12,7 +12,7 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class MultipleFormatsReaderFileConfig {
 	
-	@Value("file:${input.files.location}${input.file.pattern}")
+	@Value("file:${input.files.location}${input.file.pattern.in}")
 	private Resource inputResource;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -22,8 +22,6 @@ public class MultipleFormatsReaderFileConfig {
 		return new FlatFileItemReaderBuilder()
 				.name("arquivoMultiplosFormatosItemReader")
 				.resource(inputResource)
-				.addComment("--")
-				.linesToSkip(1)
 				.lineMapper(lineMapper)
 				.build();
 	}
