@@ -7,6 +7,7 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,8 +19,13 @@ public class ReadingFileMultipleFormatsStepConfig {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadingFileMultipleFormatsStepConfig.class);
 		
-	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
+	
+	public ReadingFileMultipleFormatsStepConfig(StepBuilderFactory stepBuilderFactory) {
+		super();
+		this.stepBuilderFactory = stepBuilderFactory;
+	}
+
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean

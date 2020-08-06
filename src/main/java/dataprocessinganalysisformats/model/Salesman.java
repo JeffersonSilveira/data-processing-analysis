@@ -3,25 +3,27 @@ package dataprocessinganalysisformats.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class Salesman implements Serializable {
 
-	private static final long serialVersionUID = 9059411616286903532L;
+	private static final long serialVersionUID = -9123377513586917140L;
 
-	@NotNull 
-	//@Pattern(regexp = "(^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$)", message = "CPF inválido")
 	private String cpf;
-
-	@NotNull
-	@Size(min = 1, max = 100)
-	@Pattern(regexp = "[a-zA-Z\\s]+", message = "Nome deve ser alfabético")
 	private String name;
-
-	@NotNull
 	private BigDecimal salary;
+
+	public Salesman() {
+		super();
+	}
+
+	public Salesman(String cpf, String name, BigDecimal salary) {
+		super();
+		this.cpf = cpf;
+		this.name = name;
+		this.salary = salary;
+	}
 
 	public String getCpf() {
 		return cpf;
@@ -43,12 +45,13 @@ public class Salesman implements Serializable {
 		return salary;
 	}
 
-	public void setSalary(BigDecimal salary) {
-		this.salary = salary;
+	public void setSalary(String salary) {
+
+		this.salary = salary != null ? new BigDecimal(salary) : null;
 	}
 
 	@Override
 	public String toString() {
-		return "Salesman [cpf=" + cpf + ", name=" + name + ", salary=" + salary + "]";
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
 	}
 }

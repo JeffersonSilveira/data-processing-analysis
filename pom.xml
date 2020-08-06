@@ -9,10 +9,9 @@
 		<version>2.3.0.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.springbatch</groupId>
-	<artifactId>ArquivoMultiplosFormatosJob</artifactId>
+	<artifactId>data-processing-analysis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ArquivoMultiplosFormatosJob</name>
+	<name>data-processing-analysis</name>
 	<description>Job que lê arquivos com múltiplos formatos de dados.</description>
 
 	<properties>
@@ -53,6 +52,14 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 	</dependencies>
 

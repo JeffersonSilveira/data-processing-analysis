@@ -2,18 +2,20 @@ package dataprocessinganalysisformats.reader;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.mapping.PatternMatchingCompositeLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.LineTokenizer;
+import org.springframework.batch.item.file.transform.RegexLineTokenizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import dataprocessinganalysisformats.enumeration.LayoutMatcherRegexEnum;
 import dataprocessinganalysisformats.model.Customer;
 import dataprocessinganalysisformats.model.Sale;
-import dataprocessinganalysisformats.model.SaleItem;
 import dataprocessinganalysisformats.model.Salesman;
 
 @Configuration
@@ -34,8 +36,6 @@ public class TransactionLineMapperConfig {
 		fieldSetMappers.put("001*", fieldSetMapper(Salesman.class));
 		fieldSetMappers.put("002*", fieldSetMapper(Customer.class));
 		fieldSetMappers.put("003*", fieldSetMapper(Sale.class));
-		fieldSetMappers.put("004*", fieldSetMapper(SaleItem.class));
-
 		return fieldSetMappers;
 	}
 
@@ -51,41 +51,30 @@ public class TransactionLineMapperConfig {
 		tokenizers.put("001*", salesmanLineTokenizer());
 		tokenizers.put("002*", customerLineTokenizer());
 		tokenizers.put("003*", saleLineTokenizer());
-		tokenizers.put("004*", saleLineItemTokenizer());
-
 		return tokenizers;
 	}
-
-	private LineTokenizer saleLineItemTokenizer() {
-		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames("id", "quantity", "price");
-		lineTokenizer.setDelimiter("-");
-		lineTokenizer.setIncludedFields(1, 2, 3);
-		return lineTokenizer;
-	}
-
+	
 	private LineTokenizer saleLineTokenizer() {
-		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames("id",  "salesmanName");
-		lineTokenizer.setDelimiter("ç");
-		lineTokenizer.setIncludedFields(1, 2);
+		RegexLineTokenizer lineTokenizer = new RegexLineTokenizer();
+		lineTokenizer.setNames("id", "saleItems", "salesmanName");
+		LayoutMatcherRegexEnum layoutMatcherRegexEnum = LayoutMatcherRegexEnum.SALE;
+		lineTokenizer.setPattern(Pattern.compile(layoutMatcherRegexEnum.getRegex()));
 		return lineTokenizer;
 	}
 
 	private LineTokenizer salesmanLineTokenizer() {
-		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+		RegexLineTokenizer lineTokenizer = new RegexLineTokenizer();
 		lineTokenizer.setNames("cpf", "name", "salary");
-		lineTokenizer.setDelimiter("ç");
-		lineTokenizer.setIncludedFields(1, 2, 3);
+		LayoutMatcherRegexEnum layoutMatcherRegexEnum = LayoutMatcherRegexEnum.SALESMAN;
+		lineTokenizer.setPattern(Pattern.compile(layoutMatcherRegexEnum.getRegex()));
 		return lineTokenizer;
 	}
 
 	private LineTokenizer customerLineTokenizer() {
-		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
+		RegexLineTokenizer lineTokenizer = new RegexLineTokenizer();
 		lineTokenizer.setNames("cnpj", "name", "businessArea");
-		lineTokenizer.setDelimiter("ç");
-		lineTokenizer.setIncludedFields(1, 2, 3);
+		LayoutMatcherRegexEnum layoutMatcherRegexEnum = LayoutMatcherRegexEnum.CUSTOMER;
+		lineTokenizer.setPattern(Pattern.compile(layoutMatcherRegexEnum.getRegex()));
 		return lineTokenizer;
-
 	}
 }

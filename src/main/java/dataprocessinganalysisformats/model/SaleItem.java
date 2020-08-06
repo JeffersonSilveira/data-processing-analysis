@@ -1,51 +1,55 @@
 package dataprocessinganalysisformats.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 public class SaleItem implements Serializable {
 
-	private static final long serialVersionUID = 7752695424777724086L;
+	private static final long serialVersionUID = -1378510079708122851L;
 
-	@NotNull
-	private Integer id;
+	private String id;
+	private String quantity;
+	private String price;
 
-	@NotNull
-	private Integer quantity;
+	public SaleItem() {
+		super();
+	}
 
-	@NotNull
-	private BigDecimal price;
+	public SaleItem(String id, String quantity, String price) {
+		super();
+		this.id = id;
+		this.quantity = quantity;
+		this.price = price;
+	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public Integer getQuantity() {
+	public String getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 
-	public BigDecimal getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
 	@Override
 	public String toString() {
-		return "SaleItem [id=" + id + ", quantity=" + quantity + ", price=" + price + "]";
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
 	}
-
 }
