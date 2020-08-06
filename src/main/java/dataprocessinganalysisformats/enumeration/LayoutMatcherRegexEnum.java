@@ -1,4 +1,4 @@
-package dataprocessinganalysisformats.reader;
+package dataprocessinganalysisformats.enumeration;
 
 public enum LayoutMatcherRegexEnum {
 

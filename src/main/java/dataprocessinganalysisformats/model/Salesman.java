@@ -25,9 +25,6 @@ public class Salesman implements Serializable {
 		this.salary = salary;
 	}
 
-//    private BigDecimal totalSalesPrice;
-//    private List<Sale> sales;
-
 	public String getCpf() {
 		return cpf;
 	}

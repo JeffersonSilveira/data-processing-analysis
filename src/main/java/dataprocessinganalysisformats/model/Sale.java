@@ -1,7 +1,6 @@
 package dataprocessinganalysisformats.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -10,8 +9,8 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import dataprocessinganalysisformats.reader.LayoutMatcherRegexEnum;
-import dataprocessinganalysisformats.reader.SaleItemEnum;
+import dataprocessinganalysisformats.enumeration.LayoutMatcherRegexEnum;
+import dataprocessinganalysisformats.enumeration.SaleItemEnum;
 
 public class Sale implements Serializable {
 
