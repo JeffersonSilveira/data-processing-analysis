@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ReadingFileMultipleFormatsWriterConfig {
+public class ReadingMultipleFormatFilesItemWriterConfig {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
 	public ItemWriter leituraArquivoDelimitadoWriter() {
