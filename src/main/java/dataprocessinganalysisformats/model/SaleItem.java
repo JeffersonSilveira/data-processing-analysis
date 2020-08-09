@@ -1,6 +1,7 @@
 package dataprocessinganalysisformats.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -9,42 +10,42 @@ public class SaleItem implements Serializable {
 
 	private static final long serialVersionUID = -1378510079708122851L;
 
-	private String id;
-	private String quantity;
-	private String price;
+	private Long id;
+	private Integer quantity;
+	private BigDecimal price;
 
 	public SaleItem() {
 		super();
 	}
 
-	public SaleItem(String id, String quantity, String price) {
+	public SaleItem(Long id, Integer quantity, BigDecimal price) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
 		this.price = price;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getQuantity() {
+	public Integer getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

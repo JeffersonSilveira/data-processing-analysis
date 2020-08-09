@@ -7,25 +7,20 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
-import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import dataprocessinganalysisformats.model.Customer;
 
 @Configuration
 public class ReadingFileMultipleFormatsStepConfig {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReadingFileMultipleFormatsStepConfig.class);
-		
+
 	public StepBuilderFactory stepBuilderFactory;
-	
+
 	public ReadingFileMultipleFormatsStepConfig(StepBuilderFactory stepBuilderFactory) {
 		super();
 		this.stepBuilderFactory = stepBuilderFactory;
 	}
-
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Bean
@@ -33,15 +28,13 @@ public class ReadingFileMultipleFormatsStepConfig {
 			FlatFileItemReader readingMultipleFormatFilesReader,
 			ItemProcessor validationProcessor,
 			ItemWriter readingMultipleFormatFilesItemWriter) {
-		
+
 		LOGGER.info("<<<<< Run Step...");
-		
-		return stepBuilderFactory
-				.get("leituraArquivoMultiplosFormatosStep")
+
+		return stepBuilderFactory.get("leituraArquivoMultiplosFormatosStep")
 				.chunk(1)
 				.reader(readingMultipleFormatFilesReader)
 				.processor(validationProcessor)
-				.writer(readingMultipleFormatFilesItemWriter)
-				.build();
+				.writer(readingMultipleFormatFilesItemWriter).build();
 	}
 }

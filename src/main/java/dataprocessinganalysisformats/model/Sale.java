@@ -1,6 +1,7 @@
 package dataprocessinganalysisformats.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -59,9 +60,9 @@ public class Sale implements Serializable {
 
 		while (matcher.find()) {
 			SaleItem saleItem = new SaleItem();
-			saleItem.setId(matcher.group(SaleItemEnum.ID.getValue()));
-			saleItem.setQuantity(matcher.group(SaleItemEnum.QUANTITY.getValue()));
-			saleItem.setPrice(matcher.group(SaleItemEnum.PRICE.getValue()));
+			saleItem.setId(new Long(matcher.group(SaleItemEnum.ID.getValue())));
+			saleItem.setQuantity(new Integer(matcher.group(SaleItemEnum.QUANTITY.getValue())));
+			saleItem.setPrice(new BigDecimal(matcher.group(SaleItemEnum.PRICE.getValue())));
 			saleItemList.add(saleItem);
 
 		}
