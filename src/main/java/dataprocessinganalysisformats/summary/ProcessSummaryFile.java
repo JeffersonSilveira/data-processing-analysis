@@ -11,16 +11,21 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 import dataprocessinganalysisformats.comparator.ComparatorPiorVendedor;
+import dataprocessinganalysisformats.model.Sale;
 import dataprocessinganalysisformats.model.Salesman;
 import dataprocessinganalysisformats.model.SummaryImport;
 
 public class ProcessSummaryFile {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProcessSummaryFile.class);
+	Gson gson = new Gson();
+
 
 	public SummaryImport summaryProcess(Object arquivo) {
 		LOGGER.info(" >> sumaryProcess");
-
+		
+		this.validationLayout(arquivo);
+		
 		SummaryImport summary = new SummaryImport();
 		summary.setPiorVendedor(this.getWorstSalesman(arquivo));
 
@@ -29,6 +34,24 @@ public class ProcessSummaryFile {
 		return summary;
 
 	}
+	
+	/**
+	 * Recupera o pior vendedor
+	 * 
+	 * @return String nome do vendedor
+	 */
+	private String validationLayout(Object arquivo) {
+		LOGGER.info(" >>  verifica layout");
+
+		Salesman salesman = gson.fromJson(arquivo.toString(), Salesman.class);
+		
+		Sale     sale     = gson.fromJson(arquivo.toString(), Sale.class);
+
+		LOGGER.info(" << retorna layout");
+		return "";
+	}
+
+	
 	/**
 	 * Recupera o pior vendedor
 	 * 
