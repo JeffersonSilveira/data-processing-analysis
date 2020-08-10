@@ -8,12 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
-import com.google.gson.Gson;
-
-import dataprocessinganalysisformats.model.Sale;
-import dataprocessinganalysisformats.model.Salesman;
-import dataprocessinganalysisformats.summary.ProcessSummaryFile;
-
 @Configuration
 public class ReadingMultipleFormatFilesItemWriterConfig {
 
@@ -32,15 +26,8 @@ public class ReadingMultipleFormatFilesItemWriterConfig {
 
 		return new LineAggregator() {
 
-			public ProcessSummaryFile sumaryImportFile;
-
 			@Override
 			public String aggregate(Object item) {
-		
-				Gson gson = new Gson();
-
-				Salesman salesman = gson.fromJson(item.toString(), Salesman.class);
-				Sale     sale     = gson.fromJson(item.toString(), Sale.class);
 
 				StringBuilder str = new StringBuilder();
 				str.append(item);
