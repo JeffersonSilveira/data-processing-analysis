@@ -10,6 +10,8 @@ import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import dataprocessinganalysisformats.model.Salesman;
+
 @Configuration
 public class ReadingFileMultipleFormatsStepConfig {
 
@@ -35,6 +37,7 @@ public class ReadingFileMultipleFormatsStepConfig {
 				.chunk(1)
 				.reader(readingMultipleFormatFilesReader)
 				.processor(validationProcessor)
-				.writer(readingMultipleFormatFilesItemWriter).build();
+				.writer(readingMultipleFormatFilesItemWriter)
+				.build();
 	}
 }
