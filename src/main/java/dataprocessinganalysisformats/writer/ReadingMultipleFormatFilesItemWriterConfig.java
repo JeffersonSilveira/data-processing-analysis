@@ -36,18 +36,15 @@ public class ReadingMultipleFormatFilesItemWriterConfig {
 
 		return new LineAggregator() {
 		
-			@Autowired
-			private ProcessSummaryFile summaryImportFile;
-
+			
 			@Override
 			public String aggregate(Object item) {
 
 				LOGGER.info("Sumarizando informações...");
-				SummaryImport summary = this.summaryImportFile.summaryProcess(item);
-				StringBuilder str = new StringBuilder();
-				str.append(item);
+				ProcessSummaryFile processSummaryFile = new ProcessSummaryFile(); 
+				SummaryImport summary = processSummaryFile.summaryProcess(item);
 
-				return str.toString();
+				return summary.getPiorVendedor().toString();
 			}
 
 		};

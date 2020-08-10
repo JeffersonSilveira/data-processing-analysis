@@ -24,10 +24,10 @@ public class ProcessSummaryFile {
 	public SummaryImport summaryProcess(Object arquivo) {
 		LOGGER.info(" >> sumaryProcess");
 		
-		this.validationLayout(arquivo);
+		String returnLayout = this.validationLayout(arquivo);
 		
 		SummaryImport summary = new SummaryImport();
-		summary.setPiorVendedor(this.getWorstSalesman(arquivo));
+		//summary.setPiorVendedor(this.getWorstSalesman(arquivo));
 
 		LOGGER.info(" << sumaryProcess");
 
@@ -43,12 +43,17 @@ public class ProcessSummaryFile {
 	private String validationLayout(Object arquivo) {
 		LOGGER.info(" >>  verifica layout");
 
-		Salesman salesman = gson.fromJson(arquivo.toString(), Salesman.class);
-		
-		Sale     sale     = gson.fromJson(arquivo.toString(), Sale.class);
+		StringBuilder str = new StringBuilder();
 
+		
+		Salesman salesman = gson.fromJson(arquivo.toString(), Salesman.class);
+		if(!salesman.getCpf().isEmpty()) {
+			
+			str.append(salesman);
+		}
+		
 		LOGGER.info(" << retorna layout");
-		return "";
+		return str.toString();
 	}
 
 	
